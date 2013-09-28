@@ -1,6 +1,5 @@
 {% load staticfiles %}
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html> <html>
     <head>
         <title>Manly Mustache Contest 2013</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +14,25 @@
     </head>
     <body>
         <div class="container">
+            <div class="col-2 col-lg-2 pull-right">
+            {% if user.is_authenticated %}
+                <a href="{% url 'voting:profile' %}">{{user.username}}</a> | <a href="{% url 'voting:logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'voting:signup' %}">Sign up</a> | <a href="{% url 'voting:login' %}">Login</a>
+            {% endif %}
+            </div>
             <h1>Manly Mustache 2013</h1>
+
+            {% if messages %}
+                <div class="row">
+                    <ul class="messages list-unstyled nav nav-pills">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="alert alert-{{message.tags}}"{% endif %}>{{message}}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
             {% block content %}
             {% endblock %}
         </div>

@@ -1,12 +1,16 @@
 /* custom.css */
 
 body,h1,h2,h3,h4 {
-    font-family: "Belleza", "Cherry Swash", Helvetica, Arial, sans-serif;
+    font-family: "Belleza", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #444;
 }
 body { background-color: #fff; }
 
 h1 { color: #7C5A3C; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
+h2 { font-size: 40px; }
 
 label { font-weight: 400; }
 
+@media (max-width: 720px) {
+	body { text-align: center; }
+}

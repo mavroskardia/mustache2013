@@ -9,7 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'voting.views.home', name='home'),
-    url(r'^voting/', include('voting.urls')),
+    url(r'^voting/', include('voting.urls', namespace='voting')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

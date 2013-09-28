@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="{% url 'voting:login' %}" method="post" class="col-12 col-lg-3">
+	{% csrf_token %}
+	{% for field in login_form %}
+		<div class="form-group">
+			{{ field }}
+		</div>
+	{% endfor %}
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary btn-lg">Login</button>
+	</div>
+</form>
+
+{% endblock %}
