@@ -1,5 +1,7 @@
 ve
+*.db
 *.log
 *.pot
 *.pyc
 local_settings.py
+mustache/voting/migrations
