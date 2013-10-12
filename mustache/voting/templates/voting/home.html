@@ -3,7 +3,7 @@
 {% block extrastyle %}
 
     <style>
-        .player section { display: inline-block; }
+        .gentleman section { display: inline-block; }
         label { display: block; }
         li { border-bottom: solid 1px #ccc; padding: 1em;}
     </style>
@@ -12,27 +12,26 @@
 
 {% block content %}
 <ul class="list-unstyled">
-    {% for p in players %}
+    {% for g in gentlemen %}
     <li>
-        <section class="player row">
-            <h2>Player Name <small>player tagline here</small></h2>
+        <section class="gentleman row">
+            <h2>{{g.name}} <small>{{g.tagline}}</small></h2>
             <section class="before col-3 col-lg-3">
                 <h3>Before</h3>
-                <a href="#"><img src="http://placehold.it/200x125" /></a>
+                <a href="{{ g.before_pic.url }}"><img src="{{ g.before_pic_resized.url }}" /></a>
             </section>
             <section class="voting col-5 col-lg-5">
                 <h3>Vote for this gentleman</h3>
-                <label><input type="checkbox" value="True" /> Best Grooming <small>Voted Player 2 best</small></label>
+                <label><input type="checkbox" value="True" /> Best Grooming <small>(already voted for Foo)</small></label>
                 <label><input type="checkbox" value="True" /> Most Creative</label>
                 <label><input type="checkbox" value="True" /> Finest Execution</label>
-                <button type="submit" class="btn btn-large btn-primary">Vote</button>
+                <button type="submit" class="btn btn-lg btn-primary">Vote</button>
             </section>
             <section class="after col-4 col-lg-4">
                 <h3>After</h3>
-                <a href="#"><img src="http://placehold.it/200x125" /></a>
+                <a href="#"><img src="http://placehold.it/200x200" /></a>
             </section>
         </section>
     </li>
     {% endfor %}
 {% endblock %}
-    
