@@ -1,43 +1,38 @@
 {% extends 'base.html' %}
 
+{% block extrastyle %}
+
+    <style>
+        .player section { display: inline-block; }
+        label { display: block; }
+        li { border-bottom: solid 1px #ccc; padding: 1em;}
+    </style>
+
+{% endblock %}
+
 {% block content %}
 <ul class="list-unstyled">
+    {% for p in players %}
     <li>
-        <section class="player">
+        <section class="player row">
             <h2>Player Name <small>player tagline here</small></h2>
-            <img src="http://placehold.it/200x125" />
-            <section class="voting">
-                <span>Vote for this gentleman:</span>
-                <label><input type="checkbox" value="True" />Best Grooming</label>
-                <label><input type="checkbox" value="True" />Most Creative</label>
-                <label><input type="checkbox" value="True" />Finest Execution</label>
+            <section class="before col-3 col-lg-3">
+                <h3>Before</h3>
+                <a href="#"><img src="http://placehold.it/200x125" /></a>
+            </section>
+            <section class="voting col-5 col-lg-5">
+                <h3>Vote for this gentleman</h3>
+                <label><input type="checkbox" value="True" /> Best Grooming <small>Voted Player 2 best</small></label>
+                <label><input type="checkbox" value="True" /> Most Creative</label>
+                <label><input type="checkbox" value="True" /> Finest Execution</label>
+                <button type="submit" class="btn btn-large btn-primary">Vote</button>
+            </section>
+            <section class="after col-4 col-lg-4">
+                <h3>After</h3>
+                <a href="#"><img src="http://placehold.it/200x125" /></a>
             </section>
         </section>
     </li>
-    <li>
-        <section class="player">
-            <h2>Player Name <small>player tagline here</small></h2>
-            <img src="http://placehold.it/200x125" />
-            <section class="voting">
-                <span>Vote for this gentleman:</span>
-                <label><input type="checkbox" value="True" />Best Grooming</label>
-                <label><input type="checkbox" value="True" />Most Creative</label>
-                <label><input type="checkbox" value="True" />Finest Execution</label>
-            </section>
-        </section>
-    </li>
-    <li>
-        <section class="player">
-            <h2>Player Name <small>player tagline here</small></h2>
-            <img src="http://placehold.it/200x125" />
-            <section class="voting">
-                <span>Vote for this gentleman:</span>
-                <label><input type="checkbox" value="True" />Best Grooming</label>
-                <label><input type="checkbox" value="True" />Most Creative</label>
-                <label><input type="checkbox" value="True" />Finest Execution</label>
-            </section>
-        </section>
-    </li>
-</ul>
+    {% endfor %}
 {% endblock %}
     
