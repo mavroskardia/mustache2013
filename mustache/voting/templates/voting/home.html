@@ -3,9 +3,8 @@
 {% block extrastyle %}
 
     <style>
-        .gentleman section { display: inline-block; }
-        label { display: block; }
         li { border-bottom: solid 1px #ccc; padding: 1em;}
+        .voting label { margin-bottom: 1em; font-size: 16px; }
     </style>
 
 {% endblock %}
@@ -16,20 +15,29 @@
     <li>
         <section class="gentleman row">
             <h2>{{g.name}} <small>{{g.tagline}}</small></h2>
-            <section class="before col-3 col-lg-3">
+            <section class="before col-2 col-lg-3">
                 <h3>Before</h3>
                 <a href="{{ g.before_pic.url }}"><img src="{{ g.before_pic_resized.url }}" /></a>
             </section>
-            <section class="voting col-5 col-lg-5">
-                <h3>Vote for this gentleman</h3>
-                <label><input type="checkbox" value="True" /> Best Grooming <small>(already voted for Foo)</small></label>
-                <label><input type="checkbox" value="True" /> Most Creative</label>
-                <label><input type="checkbox" value="True" /> Finest Execution</label>
-                <button type="submit" class="btn btn-lg btn-primary">Vote</button>
-            </section>
-            <section class="after col-4 col-lg-4">
+            <section class="after col-2 col-lg-4">
                 <h3>After</h3>
                 <a href="#"><img src="http://placehold.it/200x200" /></a>
+            </section>
+            <section class="voting col-5 col-lg-5">
+                <h3>Vote for this gentleman</h3>
+                <section>
+                    <input id="grooming{{forloop.counter}}" name="grooming" type="checkbox" value="True" />
+                    <label for="grooming{{forloop.counter}}">Best Grooming <small>(already voted for Foo)</small></label>                    
+                </section>
+                <section>
+                    <input id="execution{{forloop.counter}}" name="execution" type="checkbox" value="True" />
+                    <label for="execution{{forloop.counter}}">Finest Execution</label>
+                </section>
+                <section>
+                    <input id="creativity{{forloop.counter}}" name="creativity" type="checkbox" value="True" />
+                    <label for="creativity{{forloop.counter}}">Most Creative</label>
+                </section>
+                <button type="submit" class="btn btn-lg btn-primary">Vote</button>
             </section>
         </section>
     </li>
