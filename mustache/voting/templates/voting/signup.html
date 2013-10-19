@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-signup
+<form class="col-lg-5 col-12" method="post" action="{% url 'voting:signup' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in signup_form %}
+    <div class="form-group">    
+        {{ field.label }}
+        {{ field }}
+        {{ field.errors }}
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-lg btn-primary">Sign up</button>
+</form>
 {% endblock %}

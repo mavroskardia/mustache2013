@@ -2,11 +2,13 @@
 
 {% block content %}
 
-<form action="{% url 'voting:login' %}" method="post" class="col-12 col-lg-3">
+<form action="{% url 'voting:login' %}" method="post" class="col-12 col-lg-5">
 	{% csrf_token %}
 	{% for field in login_form %}
 		<div class="form-group">
+            {{ field.label }}
 			{{ field }}
+            {{ field.errors }}
 		</div>
 	{% endfor %}
 	<div class="form-group">

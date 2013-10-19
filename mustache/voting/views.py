@@ -5,9 +5,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
 import django.contrib.auth as auth
+from django.contrib.auth.models import User
 
 from models import Gentleman
-from forms import LoginForm
+from forms import LoginForm,SignupForm
 
 
 def home(req):
@@ -17,7 +18,23 @@ def test(req):
     return render(req, 'voting/test.html', {})
 
 def signup(req):
-	return render(req, 'voting/signup.html', {})
+    if req.method == 'POST':
+        signup_form = SignupForm(req.POST, req.FILES)
+        if signup_form.is_valid():
+            try:
+                user = User.objects.create_user(signup_form.cleaned_data['username'], None, signup_form.cleaned_data['password'])
+                gentleman = Gentleman()
+                gentleman.user_id = user.id
+                gentleman.name = signup_form.cleaned_data['username']
+                gentleman.tagline = signup_form.cleaned_data['tagline']
+                gentleman.before_pic.file = req.FILES['before_pic']
+                gentleman.save()
+            except Exception as e:
+                messages.error(req, e)
+            return HttpResponseRedirect(reverse('home'))
+    else:
+        signup_form = SignupForm()
+    return render(req, 'voting/signup.html', {'signup_form': signup_form})
 
 def login(req):
 
@@ -25,7 +42,7 @@ def login(req):
 		login_form = LoginForm(req.POST)
 
 		if login_form.is_valid():
-			user = auth.authenticate(username=req.POST['username'], password=req.POST['password'])
+			user = auth.authenticate(username=login_form['username'], password=login_form['password'])
 			if user is not None:
 				if user.is_active:
 					auth.login(req, user)
