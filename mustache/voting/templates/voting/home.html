@@ -17,11 +17,19 @@
             <h2>{{g.name}} <small>{{g.tagline}}</small></h2>
             <section class="before col-2 col-lg-3">
                 <h3>Before</h3>
+                {% if g.before_pic %}
                 <a href="{{ g.before_pic.url }}"><img src="{{ g.before_pic_resized.url }}" /></a>
+                {% else %}
+                <a href="#"><img src="http://placehold.it/200x200" /></a>
+                {% endif %}
             </section>
             <section class="after col-2 col-lg-4">
                 <h3>After</h3>
+                {% if g.after_pic %}
+                <a href="{{ g.after_pic.url }}"><img src="{{ g.after_pic_resized.url }}" /></a>
+                {% else %}
                 <a href="#"><img src="http://placehold.it/200x200" /></a>
+                {% endif %}
             </section>
             <section class="voting col-12 col-lg-5">
                 <h3>Vote for this gentleman</h3>

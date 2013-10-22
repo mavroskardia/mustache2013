@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form action="{% url 'voting:login' %}" method="post" class="col-12 col-lg-5">
+<form action="{% url 'voting:login' %}" method="post" class="col-12 col-lg-5 text-left">
 	{% csrf_token %}
 	{% for field in login_form %}
 		<div class="form-group">

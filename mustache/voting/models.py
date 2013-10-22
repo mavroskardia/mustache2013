@@ -8,7 +8,7 @@ class Gentleman(models.Model):
 
 	name = models.CharField(max_length=256)
 	tagline = models.CharField(max_length=1024,blank=True)
-	before_pic = models.ImageField(upload_to='images')
+	before_pic = models.ImageField(upload_to='images',blank=True)
 	before_pic_resized = models.ImageField(upload_to='images',blank=True)
 	after_pic = models.ImageField(upload_to='images',blank=True)
 	after_pic_resized = models.ImageField(upload_to='images',blank=True)
@@ -24,12 +24,12 @@ class Gentleman(models.Model):
 		return self.name
 
 	def resize_if_needed(self):
-		if not self.before_pic_resized:
+		if self.before_pic:
 			thumb = utils.create_thumbnail(self.before_pic.file)
 			fn = utils.create_thumbnail_name(self.before_pic.name)
 			self.before_pic_resized.save(fn, thumb)
 
-		if self.after_pic and not self.after_pic_resized:
+		if self.after_pic:
 			thumb = utils.create_thumbnail(self.after_pic.file)
 			fn = utils.create_thumbnail_name(self.after_pic.name)
 			self.after_pic_resized.save(fn, thumb)

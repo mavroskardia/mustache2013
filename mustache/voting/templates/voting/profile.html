@@ -1,5 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	{{user}}
+	<form class="col-12 col-md-5 col-lg-5 text-left" enctype="multipart/form-data" method="post" action="{% url 'voting:profile' %}">
+		{% csrf_token %}
+		<fieldset>
+			{% for field in pf %}
+				<div class="form-group">
+					<label>{{field.label}}</label>
+					{{field}}
+					{{field.errors}}
+				</div>
+			{% endfor %}
+		</fieldset>
+		<button type="submit" class="btn btn-lg btn-primary">Update</button>
+	</form>
 {% endblock %}

@@ -14,9 +14,12 @@ def create_thumbnail(image_file):
 	'''Take a Django ImageField and return a new ImageField that contains a thumbnailed version'''
 
 	fakefile = BytesIO()
-	img = Image.open(image_file)
-	img.thumbnail((200,200), Image.ANTIALIAS)
-	img.save(fakefile, format=img.format)
+	try:
+		img = Image.open(image_file)
+		img.thumbnail((200,200), Image.ANTIALIAS)
+		img.save(fakefile, format=img.format)
+	except:
+		print(image_file)
 
 	return File(fakefile)
 

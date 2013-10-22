@@ -2,13 +2,13 @@
 
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 import django.contrib.auth as auth
 from django.contrib.auth.models import User
 
 from models import Gentleman
-from forms import LoginForm,SignupForm
+from forms import LoginForm,SignupForm,ProfileForm
 
 
 def home(req):
@@ -42,7 +42,7 @@ def login(req):
 		login_form = LoginForm(req.POST)
 
 		if login_form.is_valid():
-			user = auth.authenticate(username=login_form['username'], password=login_form['password'])
+			user = auth.authenticate(username=login_form.cleaned_data['username'], password=login_form.cleaned_data['password'])
 			if user is not None:
 				if user.is_active:
 					auth.login(req, user)
@@ -59,7 +59,32 @@ def login(req):
 	})
 
 def profile(req):
-	return render(req, 'voting/profile.html')
+
+	g = get_object_or_404(Gentleman, pk=req.user.gentleman.id)
+
+	if req.method == 'POST':
+		pf = ProfileForm(req.POST, req.FILES, instance=g)
+
+		if pf.is_valid():
+			ng = pf.save()
+
+			if 'before_pic' in req.FILES:
+				g.before_pic.file = req.FILES['before_pic']
+			if 'after_pic' in req.FILES:
+				g.after_pic.file = req.FILES['after_pic']
+
+			ng.user_id = g.user_id
+			ng.id = g.id
+			ng.save()
+
+			pf = ProfileForm(instance=ng)
+
+			messages.info(req, 'Gentleman updated successfully.')
+
+	else:
+		pf = ProfileForm(instance=g)
+
+	return render(req, 'voting/profile.html', {'pf': pf })
 
 def logout(req):
 	auth.logout(req)
