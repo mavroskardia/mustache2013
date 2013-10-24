@@ -1,5 +1,7 @@
 # Create your views here.
 
+from random import shuffle
+
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -12,7 +14,10 @@ from forms import LoginForm,ParticipateForm,ProfileForm
 
 
 def home(req):
-    return render(req, 'voting/home.html', {'gentlemen': Gentleman.objects.all })
+    gents = list(Gentleman.objects.all())
+    shuffle(gents)
+
+    return render(req, 'voting/home.html', {'gentlemen': gents })
 
 def test(req):
     return render(req, 'voting/test.html', {})
@@ -56,53 +61,53 @@ def participate(req):
 
 def login(req):
 
-	if req.method == 'POST':
-		login_form = LoginForm(req.POST)
+    if req.method == 'POST':
+        login_form = LoginForm(req.POST)
 
-		if login_form.is_valid():
-			user = auth.authenticate(username=login_form.cleaned_data['username'], password=login_form.cleaned_data['password'])
-			if user is not None:
-				if user.is_active:
-					auth.login(req, user)
-					return home(req)
-				else:
-					messages.error(req, 'Not an active user')
-			else:
-				messages.error(req, 'Invalid username or password')
-	else:
-		login_form = LoginForm()
+        if login_form.is_valid():
+            user = auth.authenticate(username=login_form.cleaned_data['username'], password=login_form.cleaned_data['password'])
+            if user is not None:
+                if user.is_active:
+                    auth.login(req, user)
+                    return home(req)
+                else:
+                    messages.error(req, 'Not an active user')
+            else:
+                messages.error(req, 'Invalid username or password')
+    else:
+        login_form = LoginForm()
 
-	return render(req, 'voting/login.html', {
-		'login_form': login_form
-	})
+    return render(req, 'voting/login.html', {
+        'login_form': login_form
+    })
 
 def profile(req):
 
-	g = get_object_or_404(Gentleman, pk=req.user.gentleman.id)
+    g = get_object_or_404(Gentleman, pk=req.user.gentleman.id)
 
-	if req.method == 'POST':
-		pf = ProfileForm(req.POST, req.FILES, instance=g)
+    if req.method == 'POST':
+        pf = ProfileForm(req.POST, req.FILES, instance=g)
 
-		if pf.is_valid():
-			ng = pf.save()
+        if pf.is_valid():
+            ng = pf.save()
 
-			if 'before_pic' in req.FILES:
-				g.before_pic.file = req.FILES['before_pic']
-			if 'after_pic' in req.FILES:
-				g.after_pic.file = req.FILES['after_pic']
+            if 'before_pic' in req.FILES:
+                g.before_pic.file = req.FILES['before_pic']
+            if 'after_pic' in req.FILES:
+                g.after_pic.file = req.FILES['after_pic']
 
-			ng.user_id = g.user_id
-			ng.id = g.id
-			ng.save()
+            ng.user_id = g.user_id
+            ng.id = g.id
+            ng.save()
 
-			pf = ProfileForm(instance=ng)
+            pf = ProfileForm(instance=ng)
 
-			messages.info(req, 'Gentleman updated successfully.')
+            messages.info(req, 'Gentleman updated successfully.')
 
-	else:
-		pf = ProfileForm(instance=g)
+    else:
+        pf = ProfileForm(instance=g)
 
-	return render(req, 'voting/profile.html', {'pf': pf })
+    return render(req, 'voting/profile.html', {'pf': pf })
 
 def vote(req):
     if req.method == 'POST':
@@ -114,7 +119,7 @@ def vote(req):
             vote.user_id = req.user.id
 
         if 'execution' in req.POST:
-    		vote.execution = vote_target
+            vote.execution = vote_target
 
         if 'grooming' in req.POST:
             vote.grooming = vote_target
@@ -129,5 +134,5 @@ def vote(req):
     return HttpResponseRedirect(reverse('home'))
 
 def logout(req):
-	auth.logout(req)
-	return home(req)
+    auth.logout(req)
+    return home(req)
