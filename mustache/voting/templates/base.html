@@ -14,7 +14,7 @@
     </head>
     <body>
         <div class="container">
-            <div class="col-2 col-lg-2 pull-right">
+            <div class="col-3 col-lg-3 pull-right">
             {% if user.is_authenticated %}
                 {% if user.gentleman %}
                 Logged in as <strong><a href="{% url 'voting:profile' %}">{{user.username}}</a></strong> | <a href="{% url 'voting:logout' %}">Logout</a>
@@ -25,17 +25,18 @@
                 <a href="{% url 'voting:participate' %}">Participate</a> | <a href="{% url 'voting:register' %}">Register</a> | <a href="{% url 'voting:login' %}">Login</a>
             {% endif %}
             </div>
-            
+
             <h1><a href="{% url 'home' %}">Manly Mustache 2013</a></h1>
 
             {% if messages %}
-                <div class="row">
-                    <ul class="messages list-unstyled nav nav-pills">
-                    {% for message in messages %}
-                        <li{% if message.tags %} class="alert alert-{{message.tags}}"{% endif %}>{{message}}</li>
-                    {% endfor %}
-                    </ul>
-                </div>
+                <ul class="messages list-unstyled nav nav-pills">
+                {% for message in messages %}
+                    <li class="col-xs-12 alert alert-dismissable {% if message.tags %}alert-{{message.tags}}{% endif %}">
+                        <span class="pull-left">{{message}}</span>
+                        <button class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    </li>
+                {% endfor %}
+                </ul>
             {% endif %}
 
             {% block content %}

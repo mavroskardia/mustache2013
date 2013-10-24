@@ -27,10 +27,10 @@ def register(req):
                 auth.login(req, user)
                 return HttpResponseRedirect(reverse('home'))
             except Exception as e:
-                messages.error(req, e)            
+                messages.error(req, e)
     else:
         register_form = LoginForm()
-        
+
     return render(req, 'voting/register.html', { 'register_form':register_form } )
 
 def participate(req):
@@ -112,20 +112,20 @@ def vote(req):
         except Vote.DoesNotExist:
             vote = Vote()
             vote.user_id = req.user.id
-            
+
         if 'execution' in req.POST:
-            vote.execution = vote_target
-            
+    		vote.execution = vote_target
+
         if 'grooming' in req.POST:
             vote.grooming = vote_target
-                
+
         if 'creativity' in req.POST:
             vote.creativity = vote_target
-            
+
         vote.save()
-        
-        messages.warning(req, '%s' % req.user.vote)
-    
+
+        messages.info(req, 'Placed your vote!')
+
     return HttpResponseRedirect(reverse('home'))
 
 def logout(req):

@@ -3,7 +3,7 @@
 {% block extrastyle %}
 
     <style>
-        li { border-bottom: solid 1px #ccc; padding: 1em;}
+        li { border-bottom: solid 1px #ccc; padding-bottom: 1em;}
         .voting label { font-size: 16px; }
     </style>
 
@@ -11,6 +11,7 @@
 
 {% block content %}
 <ul class="list-unstyled">
+{% if gentlemen|length %}
     {% for g in gentlemen %}
     <li>
         <section class="gentleman row">
@@ -38,30 +39,41 @@
                     <input type="hidden" name="gentleman_id" value="{{ g.id }}" />
                     <fieldset>
                         <section class="form-group">
-                            <input id="grooming{{forloop.counter}}" name="grooming" type="checkbox" value="True" />
+                            <input id="grooming{{forloop.counter}}" name="grooming" type="checkbox"{% if user.vote.grooming == g %}checked="checked"{% endif %} value="True" />
                             <label for="grooming{{forloop.counter}}">
                                 Best Grooming
-                                <small>(already voted for Foo)</small>
+                                {% if user.vote.grooming and user.vote.grooming != g %}
+                                <small>(previously voted for {{user.vote.grooming.name}})</small>
+                                {% endif %}
                             </label>
                         </section>
                         <section class="form-group">
-                            <input id="execution{{forloop.counter}}" name="execution" type="checkbox" value="True" />
+                            <input id="execution{{forloop.counter}}" name="execution" type="checkbox"{% if user.vote.execution == g %}checked="checked"{% endif %} value="True" />
                             <label for="execution{{forloop.counter}}">
                                 Finest Execution
+                                {% if user.vote.execution and user.vote.execution != g %}
+                                <small>(previously voted for {{user.vote.execution.name}})</small>
+                                {% endif %}
                             </label>
                         </section>
                         <section class="form-group">
-                            <input id="creativity{{forloop.counter}}" name="creativity" type="checkbox" value="True" />
+                            <input id="creativity{{forloop.counter}}" name="creativity" type="checkbox"{% if user.vote.creativity == g %}checked="checked"{% endif %} value="True" />
                             <label for="creativity{{forloop.counter}}">
                                 Most Creative
+                                {% if user.vote.creativity and user.vote.creativity != g %}
+                                <small>(previously voted for {{user.vote.creativity.name}})</small>
+                                {% endif %}
                             </label>
-                        </section>                        
+                        </section>
                         <button type="submit" class="btn btn-lg btn-primary">Vote</button>
                     </fieldset>
                 </form>
-                
+
             </section>
         </section>
     </li>
     {% endfor %}
+{% else %}
+    <strong>No participants yet!</strong>
+{% endif %}
 {% endblock %}
