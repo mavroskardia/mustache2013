@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form class="col-lg-5 col-12" method="post" action="{% url 'voting:signup' %}" enctype="multipart/form-data">
+<form class="col-lg-5 col-12" method="post" action="{% url 'voting:participate' %}" enctype="multipart/form-data">
     {% csrf_token %}
-    {% for field in signup_form %}
+    {% for field in participate_form %}
     <div class="form-group">    
         {{ field.label }}
         {{ field }}

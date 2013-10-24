@@ -8,7 +8,7 @@ import django.contrib.auth as auth
 from django.contrib.auth.models import User
 
 from models import Gentleman
-from forms import LoginForm,SignupForm,ProfileForm
+from forms import LoginForm,ParticipateForm,ProfileForm
 
 
 def home(req):
@@ -17,24 +17,42 @@ def home(req):
 def test(req):
     return render(req, 'voting/test.html', {})
 
-def signup(req):
+def register(req):
     if req.method == 'POST':
-        signup_form = SignupForm(req.POST, req.FILES)
-        if signup_form.is_valid():
+        register_form = LoginForm(req.POST)
+        if register_form.is_valid():
             try:
-                user = User.objects.create_user(signup_form.cleaned_data['username'], None, signup_form.cleaned_data['password'])
+                user = User.objects.create_user(register_form.cleaned_data['username'], None, register_form.cleaned_data['password'])
+                user.backend = 'django.contrib.auth.backends.ModelBackend'
+                auth.login(req, user)
+                return HttpResponseRedirect(reverse('home'))
+            except Exception as e:
+                messages.error(req, e)            
+    else:
+        register_form = LoginForm()
+        
+    return render(req, 'voting/register.html', { 'register_form':register_form } )
+
+def participate(req):
+    if req.method == 'POST':
+        participate_form = ParticipateForm(req.POST, req.FILES)
+        if participate_form.is_valid():
+            try:
+                user = User.objects.create_user(participate_form.cleaned_data['username'], None, participate_form.cleaned_data['password'])
                 gentleman = Gentleman()
                 gentleman.user_id = user.id
-                gentleman.name = signup_form.cleaned_data['username']
-                gentleman.tagline = signup_form.cleaned_data['tagline']
-                gentleman.before_pic.file = req.FILES['before_pic']
+                gentleman.name = participate_form.cleaned_data['username']
+                gentleman.tagline = participate_form.cleaned_data['tagline']
+                gentleman.before_pic = participate_form.cleaned_data['before_pic']
                 gentleman.save()
+                user.backend = 'django.contrib.auth.backends.ModelBackend'
+                auth.login(req, user)
             except Exception as e:
                 messages.error(req, e)
             return HttpResponseRedirect(reverse('home'))
     else:
-        signup_form = SignupForm()
-    return render(req, 'voting/signup.html', {'signup_form': signup_form})
+        participate_form = ParticipateForm()
+    return render(req, 'voting/participate.html', {'participate_form': participate_form})
 
 def login(req):
 
@@ -85,6 +103,9 @@ def profile(req):
 		pf = ProfileForm(instance=g)
 
 	return render(req, 'voting/profile.html', {'pf': pf })
+
+def vote(req):
+    return HttpResponse('OK')
 
 def logout(req):
 	auth.logout(req)

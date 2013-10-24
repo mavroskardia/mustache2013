@@ -16,11 +16,16 @@
         <div class="container">
             <div class="col-2 col-lg-2 pull-right">
             {% if user.is_authenticated %}
-                <a href="{% url 'voting:profile' %}">{{user.username}}</a> | <a href="{% url 'voting:logout' %}">Logout</a>
+                {% if user.gentleman %}
+                Logged in as <strong><a href="{% url 'voting:profile' %}">{{user.username}}</a></strong> | <a href="{% url 'voting:logout' %}">Logout</a>
+                {% else %}
+                Logged in as <strong>{{ user.username }}</strong> | <a href="{% url 'voting:logout' %}">Logout</a>
+                {% endif %}
             {% else %}
-                <a href="{% url 'voting:signup' %}">Sign up</a> | <a href="{% url 'voting:login' %}">Login</a>
+                <a href="{% url 'voting:participate' %}">Participate</a> | <a href="{% url 'voting:register' %}">Register</a> | <a href="{% url 'voting:login' %}">Login</a>
             {% endif %}
             </div>
+            
             <h1><a href="{% url 'home' %}">Manly Mustache 2013</a></h1>
 
             {% if messages %}

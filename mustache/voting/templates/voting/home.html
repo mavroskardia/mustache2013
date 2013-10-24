@@ -4,7 +4,7 @@
 
     <style>
         li { border-bottom: solid 1px #ccc; padding: 1em;}
-        .voting label { margin-bottom: 1em; font-size: 16px; }
+        .voting label { font-size: 16px; }
     </style>
 
 {% endblock %}
@@ -33,19 +33,32 @@
             </section>
             <section class="voting col-12 col-lg-5">
                 <h3>Vote for this gentleman</h3>
-                <section>
-                    <input id="grooming{{forloop.counter}}" name="grooming" type="checkbox" value="True" />
-                    <label for="grooming{{forloop.counter}}">Best Grooming <small>(already voted for Foo)</small></label>
-                </section>
-                <section>
-                    <input id="execution{{forloop.counter}}" name="execution" type="checkbox" value="True" />
-                    <label for="execution{{forloop.counter}}">Finest Execution</label>
-                </section>
-                <section>
-                    <input id="creativity{{forloop.counter}}" name="creativity" type="checkbox" value="True" />
-                    <label for="creativity{{forloop.counter}}">Most Creative</label>
-                </section>
-                <button type="submit" class="btn btn-lg btn-primary">Vote</button>
+                <form method="post" action="{% url 'voting:vote' %}">
+                    {% csrf_token %}
+                    <fieldset>
+                        <section class="form-group">
+                            <input id="grooming{{forloop.counter}}" name="grooming" type="checkbox" value="True" />
+                            <label for="grooming{{forloop.counter}}">
+                                Best Grooming
+                                <small>(already voted for Foo)</small>
+                            </label>
+                        </section>
+                        <section class="form-group">
+                            <input id="execution{{forloop.counter}}" name="execution" type="checkbox" value="True" />
+                            <label for="execution{{forloop.counter}}">
+                                Finest Execution
+                            </label>
+                        </section>
+                        <section class="form-group">
+                            <input id="creativity{{forloop.counter}}" name="creativity" type="checkbox" value="True" />
+                            <label for="creativity{{forloop.counter}}">
+                                Most Creative
+                            </label>
+                        </section>                        
+                        <button type="submit" class="btn btn-lg btn-primary">Vote</button>
+                    </fieldset>
+                </form>
+                
             </section>
         </section>
     </li>
