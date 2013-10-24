@@ -7,7 +7,7 @@ from django.contrib import messages
 import django.contrib.auth as auth
 from django.contrib.auth.models import User
 
-from models import Gentleman
+from models import Gentleman,Vote
 from forms import LoginForm,ParticipateForm,ProfileForm
 
 
@@ -105,7 +105,28 @@ def profile(req):
 	return render(req, 'voting/profile.html', {'pf': pf })
 
 def vote(req):
-    return HttpResponse('OK')
+    if req.method == 'POST':
+        vote_target = get_object_or_404(Gentleman, pk=req.POST['gentleman_id'])
+        try:
+            vote = Vote.objects.get(user=req.user)
+        except Vote.DoesNotExist:
+            vote = Vote()
+            vote.user_id = req.user.id
+            
+        if 'execution' in req.POST:
+            vote.execution = vote_target
+            
+        if 'grooming' in req.POST:
+            vote.grooming = vote_target
+                
+        if 'creativity' in req.POST:
+            vote.creativity = vote_target
+            
+        vote.save()
+        
+        messages.warning(req, '%s' % req.user.vote)
+    
+    return HttpResponseRedirect(reverse('home'))
 
 def logout(req):
 	auth.logout(req)

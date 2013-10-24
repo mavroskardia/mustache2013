@@ -7,9 +7,13 @@ from voting.models import Gentleman,Vote
 class GentlemanInline(admin.StackedInline):
 	model = Gentleman
 	can_delete = False
+    
+class VoteInline(admin.StackedInline):
+    model = Vote
+    can_delete = False
 	
 class UserAdmin(UserAdmin):
-	inlines = (GentlemanInline,)
+	inlines = (GentlemanInline,VoteInline)
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)

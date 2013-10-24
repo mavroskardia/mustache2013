@@ -36,13 +36,13 @@ class Gentleman(models.Model):
 
 
 class Vote(models.Model):
-    user = models.ForeignKey(User)
-    execution = models.ForeignKey(Gentleman,blank=True,related_name='execution_set')
-    grooming = models.ForeignKey(Gentleman,blank=True,related_name='grooming_set')
-    creativity = models.ForeignKey(Gentleman,blank=True,related_name='creativity_set')
+    user = models.OneToOneField(User)
+    execution = models.ForeignKey(Gentleman, null=True, blank=True, related_name='execution_set')
+    grooming = models.ForeignKey(Gentleman, null=True, blank=True, related_name='grooming_set')
+    creativity = models.ForeignKey(Gentleman, null=True, blank=True, related_name='creativity_set')
     
     def __str__(self):
 		return self.__unicode__()
 
     def __unicode__(self):
-		return '%s voted: Execution (%s) Grooming (%s) Creativity (%s)' % (self.user.username, self.execution.name, self.grooming.name, self.creativity.name)
+		return '%s\'s vote' % self.user.username
