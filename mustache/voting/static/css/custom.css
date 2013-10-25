@@ -16,3 +16,5 @@ label { font-weight: 400; }
 @media (max-width: 720px) {
 	body { text-align: center; }
 }
+
+.pointer { cursor: pointer; }

@@ -12,6 +12,17 @@ The contest begins on November 1st, where each participating gentleman must be c
 
 It is a work-in-progress, but takes care of the basics of participation such as voting and image submission.
 
+Instructions to get it running
+------------------------------
+
+* Make a virtualenv in checked out dir: ```virtualenv-2.7 ve```
+* Activate your ve: ```source ve/bin/activate```
+* Install requirements: ```pip install -r requirements.txt```
+* Set up migrations: ```cd mustache; ./manage.py schemamigration --initial voting```
+* Sync your database: ```./manage.py syncdb```
+* Run migration: ```./manage.py migrate voting```
+* Try out test server: ```./manage.py runserver```
+
 todo
 ----
 - [x] Randomize listing

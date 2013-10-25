@@ -9,16 +9,15 @@ from django.contrib import messages
 import django.contrib.auth as auth
 from django.contrib.auth.models import User
 
-from models import Gentleman,Vote
-from forms import LoginForm,ParticipateForm,ProfileForm
+from models import Gentleman,Vote,Comment
+from forms import LoginForm,ParticipateForm,ProfileForm,CommentForm
 
 
 def home(req):
     gents = list(Gentleman.objects.all())
-
     shuffle(gents)
 
-    return render(req, 'voting/home.html', {'gentlemen': gents })
+    return render(req, 'voting/home.html', {'gentlemen': gents, 'comment_form': CommentForm() })
 
 def register(req):
     if req.method == 'POST':
@@ -134,6 +133,14 @@ def vote(req):
         vote.save()
 
         messages.info(req, 'Placed your vote!')
+
+    return HttpResponseRedirect(reverse('home'))
+
+def comment(req):
+    if req.method == 'POST':
+        pass
+
+    messages.info(req, 'Added comment??')
 
     return HttpResponseRedirect(reverse('home'))
 

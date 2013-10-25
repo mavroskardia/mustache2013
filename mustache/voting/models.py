@@ -40,9 +40,22 @@ class Vote(models.Model):
     execution = models.ForeignKey(Gentleman, null=True, blank=True, related_name='execution_set')
     grooming = models.ForeignKey(Gentleman, null=True, blank=True, related_name='grooming_set')
     creativity = models.ForeignKey(Gentleman, null=True, blank=True, related_name='creativity_set')
-    
+
     def __str__(self):
 		return self.__unicode__()
 
     def __unicode__(self):
 		return '%s\'s vote' % self.user.username
+
+class Comment(models.Model):
+	poster = models.ForeignKey(User)
+	gentleman = models.ForeignKey(Gentleman)
+	timestamp = models.DateTimeField(auto_now_add=True)
+	text = models.TextField()
+
+	def __str__(self):
+		return self.__unicode__()
+
+	def __unicode__(self):
+		truncd = (self.text[:40] + '...') if len(self.text) > 40 else self.text
+		return 'Comment about %s on %s: %s' % (self.gentleman.name, self.timestamp, truncd)
