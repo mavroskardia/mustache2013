@@ -1,5 +1,0 @@
-x Randomize listing
-x Login to vote
-Add LESS
-Convert Bootstrap to LESS
-

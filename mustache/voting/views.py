@@ -15,12 +15,10 @@ from forms import LoginForm,ParticipateForm,ProfileForm
 
 def home(req):
     gents = list(Gentleman.objects.all())
+
     shuffle(gents)
 
     return render(req, 'voting/home.html', {'gentlemen': gents })
-
-def test(req):
-    return render(req, 'voting/test.html', {})
 
 def register(req):
     if req.method == 'POST':
