@@ -14,9 +14,9 @@ It is a work-in-progress, but takes care of the basics of participation such as 
 
 todo
 ----
-x	Randomize listing
-x	Login to vote
-	Add LESS
-	Convert Bootstrap to LESS
-	Allow non-participating users to convert to participating
-	Comments on submissions?
+- [x] Randomize listing
+- [x] Login to vote
+- [ ] Add LESS
+- [ ] Convert Bootstrap to LESS
+- [ ] Allow non-participating users to convert to participating
+- [ ] Comments on submissions?
