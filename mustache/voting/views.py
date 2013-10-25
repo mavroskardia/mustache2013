@@ -110,7 +110,13 @@ def profile(req):
     return render(req, 'voting/profile.html', {'pf': pf })
 
 def vote(req):
+
     if req.method == 'POST':
+
+        if not req.user.is_authenticated():
+            messages.warning(req, 'You need to login before you can vote')
+            return HttpResponseRedirect(reverse('voting:login'))
+
         vote_target = get_object_or_404(Gentleman, pk=req.POST['gentleman_id'])
         try:
             vote = Vote.objects.get(user=req.user)
