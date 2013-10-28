@@ -29,8 +29,6 @@ label { font-weight: 400; }
 
 .comments form { margin-top: 1em; }
 
-.comments .loginorregister { margin-top: 1em; }
-
 .comments h4 {
 	border-bottom: solid 1px #ddd;
 	margin-bottom: 0;
@@ -48,3 +46,6 @@ label { font-weight: 400; }
 }
 
 .dontforget { background-color: #d0edf1; }
+
+.loginorregister { margin-top: 1em; }
+
