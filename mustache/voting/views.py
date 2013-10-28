@@ -137,10 +137,19 @@ def vote(req):
     return HttpResponseRedirect(reverse('home'))
 
 def comment(req):
-    if req.method == 'POST':
-        pass
+    if req.method == 'POST' and 'text' in req.POST and req.POST['text']:
+        g = get_object_or_404(Gentleman, pk=req.POST['gentleman_id'])
 
-    messages.info(req, 'Added comment??')
+        cf = CommentForm(req.POST)
+
+        if cf.is_valid():
+            c = Comment()
+            c.poster = req.user
+            c.gentleman = g
+            c.text = cf.cleaned_data['text']
+            c.save()
+
+            messages.info(req, 'Added comment!')
 
     return HttpResponseRedirect(reverse('home'))
 
