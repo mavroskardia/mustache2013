@@ -101,12 +101,12 @@
                         </fieldset>
                     </form>
                     {% else %}
-                    <p><a href="{% url 'voting:login' %}">Login</a> <span class="or">or</span> <a href="{% url 'voting:register' %}">Register</a> to comment!</p>
+                    <p class="loginorregister"><a href="{% url 'voting:login' %}">Login</a> <span class="or">or</span> <a href="{% url 'voting:register' %}">Register</a> to comment!</p>
                     {% endif %}
                 </div>
             </section>
             {% else %}
-            <p><a href="{% url 'voting:login' %}">Login</a> <span class="or">or</span> <a href="{% url 'voting:register' %}">Register</a> to comment!</p>
+            <p class="loginorregister"><a href="{% url 'voting:login' %}">Login</a> <span class="or">or</span> <a href="{% url 'voting:register' %}">Register</a> to comment!</p>
             {% endif %}
             <!-- end comments section -->
 
