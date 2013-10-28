@@ -1,18 +1,36 @@
 /* custom.css */
 
+body { background-color: #fff; }
+
+@media (max-width: 720px) {
+	body { text-align: center; }
+}
+
 body,h1,h2,h3,h4 {
     font-family: "Belleza", "Helvetica Neue", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -webkit-text-stroke: 1px rgba(0,0,0,0.1);
     color: #444;
 }
-body { background-color: #fff; }
 
 h1 { color: #7C5A3C; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
+
 h2 { font-size: 40px; }
 
 label { font-weight: 400; }
 
-@media (max-width: 720px) {
-	body { text-align: center; }
+.pointer { cursor: pointer; }
+
+.comments { text-align: left; padding: 1em; }
+
+.comments h4 {
+	border-bottom: solid 1px #ddd;
+}
+
+.comments [id^="comments"] {
+	margin-left: 1em;
+}
+
+.comments [id^="comments"] p {
+	margin-left: 1em;
 }
