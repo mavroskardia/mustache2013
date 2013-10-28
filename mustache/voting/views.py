@@ -66,7 +66,7 @@ def login(req):
             if user is not None:
                 if user.is_active:
                     auth.login(req, user)
-                    return home(req)
+                    return HttpResponseRedirect(reverse('home'))
                 else:
                     messages.error(req, 'Not an active user')
             else:

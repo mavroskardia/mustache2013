@@ -25,6 +25,9 @@ To Do
 * [x] Randomize listing
 * [x] Login to vote
 * [x] Comments on submissions
+* [ ] Vote across all gentlemen at once instead of one at a time
+* [ ] Quick look at your current votes
+* [ ] Jump to any gentleman
 * [ ] Add LESS
 * [ ] Convert Bootstrap to LESS
 * [ ] Allow non-participating users to convert to participating?

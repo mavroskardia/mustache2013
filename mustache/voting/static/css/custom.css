@@ -9,7 +9,7 @@ body { background-color: #fff; }
 body,h1,h2,h3,h4 {
     font-family: "Belleza", "Helvetica Neue", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke: 1px rgba(0,0,0,0.1);
+    -webkit-text-stroke: 0.1px rgba(0,0,0,0.1);
     color: #444;
 }
 
@@ -22,15 +22,20 @@ label { font-weight: 400; }
 .pointer { cursor: pointer; }
 
 .comments { text-align: left; padding: 1em; }
-
+.comments [id^="comments"],
+.comments [id^="comments"] p
+{ margin-left: 1em; }
 .comments h4 {
 	border-bottom: solid 1px #ddd;
+	margin-bottom: 0;
+	box-shadow: 0 5px 12px -3px rgba(0,0,0,0.1);
 }
 
-.comments [id^="comments"] {
-	margin-left: 1em;
-}
-
-.comments [id^="comments"] p {
-	margin-left: 1em;
+.or {
+	border: solid 1px #aaa;
+	border-radius: 15px;
+	background-color: #f1edd0;
+	color: #444;
+	font-weight: bold;
+	padding: 3px 5px;
 }
