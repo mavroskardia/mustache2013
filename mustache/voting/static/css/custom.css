@@ -22,14 +22,19 @@ label { font-weight: 400; }
 .pointer { cursor: pointer; }
 
 .comments { text-align: left; padding: 1em; }
+
 .comments [id^="comments"],
 .comments [id^="comments"] p
 { margin-left: 1em; }
+
+.comments form { margin-top: 1em; }
+
 .comments h4 {
 	border-bottom: solid 1px #ddd;
 	margin-bottom: 0;
 	box-shadow: 0 5px 12px -3px rgba(0,0,0,0.1);
 }
+
 
 .or {
 	border: solid 1px #aaa;
