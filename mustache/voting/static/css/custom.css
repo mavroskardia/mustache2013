@@ -1,6 +1,6 @@
 /* custom.css */
 
-body { background-color: #fff; }
+body { background-color: #fff; padding-bottom: 40px; }
 
 @media (max-width: 720px) {
 	body { text-align: center; }
@@ -19,7 +19,18 @@ h2 { font-size: 40px; }
 
 label { font-weight: 400; }
 
+.nav.navbar-default.navbar-fixed-bottom {
+	box-shadow: 0 -5px 5px rgba(0,0,0,0.1);
+	background-color: #444;
+	color: #ccc;
+	padding: 2px;
+}
+
 .pointer { cursor: pointer; }
+
+.gentleman .form-group { margin-bottom: 0; line-height: 40px; }
+.gentleman .form-group:hover { background-color: #f7f7f7; }
+.gentleman .form-group label { cursor: pointer; }
 
 .comments { text-align: left; padding: 1em; }
 
