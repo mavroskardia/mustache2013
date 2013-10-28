@@ -1,9 +1,7 @@
 Manly Mustache Contest - 2013 Edition
 =====================================
-
 What is it?
 -----------
-
 This is the source code used to run the [Manly Mustache Contest](http://mustache.chryso.net) (2013 Edition).
 
 The contest is meant to correspond to No-shave November and [Movember](http://us.movember.com) as a way to raise awareness for men's health issues.
@@ -14,7 +12,6 @@ It is a work-in-progress, but takes care of the basics of participation such as 
 
 Instructions to get it running
 ------------------------------
-
 * Make a virtualenv in checked out dir: ```virtualenv-2.7 ve```
 * Activate your ve: ```source ve/bin/activate```
 * Install requirements: ```pip install -r requirements.txt```
@@ -23,11 +20,11 @@ Instructions to get it running
 * Run migration: ```./manage.py migrate voting```
 * Try out test server: ```./manage.py runserver```
 
-todo
-----
-- [x] Randomize listing
-- [x] Login to vote
-- [ ] Add LESS
-- [ ] Convert Bootstrap to LESS
-- [ ] Allow non-participating users to convert to participating
-- [ ] Comments on submissions?
+To Do
+-----
+* [x] Randomize listing
+* [x] Login to vote
+* [x] Comments on submissions
+* [ ] Add LESS
+* [ ] Convert Bootstrap to LESS
+* [ ] Allow non-participating users to convert to participating?
