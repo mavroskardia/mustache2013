@@ -4,7 +4,7 @@
 
 <p>Register so you can vote!</p>
 
-<form class="col-12 col-md-5 col-lg-5" method="post" action="{% url 'voting:register' %}">
+<form class="col-12 col-md-5 col-lg-5 text-left" method="post" action="{% url 'voting:register' %}">
     {% csrf_token %}
     <fieldset>
         {% for field in register_form %}
