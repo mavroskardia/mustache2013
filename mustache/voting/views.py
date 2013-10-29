@@ -15,7 +15,9 @@ from forms import LoginForm,ParticipateForm,ProfileForm,CommentForm
 
 def home(req):
     gents = list(Gentleman.objects.all())
-    shuffle(gents)
+
+    if 'mustache.chryso.net' not in req.META['HTTP_REFERER']:
+        shuffle(gents) # only want to shuffle when we aren't already on the site to avoid confusion after voting, logging, etc.
 
     return render(req, 'voting/home.html', {'gentlemen': gents, 'comment_form': CommentForm() })
 
@@ -114,7 +116,6 @@ def vote(req):
             messages.warning(req, 'You need to login before you can vote')
             return HttpResponseRedirect(reverse('voting:login'))
 
-        vote_target = get_object_or_404(Gentleman, pk=req.POST['gentleman_id'])
         try:
             vote = Vote.objects.get(user=req.user)
         except Vote.DoesNotExist:
@@ -122,13 +123,13 @@ def vote(req):
             vote.user_id = req.user.id
 
         if 'execution' in req.POST:
-            vote.execution = vote_target
+            vote.execution_id = req.POST['execution']
 
         if 'grooming' in req.POST:
-            vote.grooming = vote_target
+            vote.grooming_id = req.POST['grooming']
 
         if 'creativity' in req.POST:
-            vote.creativity = vote_target
+            vote.creativity_id = req.POST['creativity']
 
         vote.save()
 

@@ -10,110 +10,111 @@
 {% endblock %}
 
 {% block content %}
-<ul class="list-unstyled">
-{% if gentlemen|length %}
-    {% for g in gentlemen %}
-    <li>
-        <section class="gentleman clearfix">
-            <div class="row">
-                <h2>{{g.name}} <small>{{g.tagline}}</small></h2>
-                <section class="before col-2 col-lg-3">
-                    <h3>Before</h3>
-                    {% if g.before_pic %}
-                    <a href="{{ g.before_pic.url }}"><img src="{{ g.before_pic_resized.url }}" /></a>
-                    {% else %}
-                    <a href="#"><img src="http://placehold.it/200x200" /></a>
-                    {% endif %}
-                </section>
-                <section class="after col-2 col-lg-4">
-                    <h3>After</h3>
-                    {% if g.after_pic %}
-                    <a href="{{ g.after_pic.url }}"><img src="{{ g.after_pic_resized.url }}" /></a>
-                    {% else %}
-                    <a href="#"><img src="http://placehold.it/200x200" /></a>
-                    {% endif %}
-                </section>
-                <section class="voting col-12 col-lg-5">
-                    <h3>Vote for this gentleman</h3>
-                    <form method="post" action="{% url 'voting:vote' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="gentleman_id" value="{{ g.id }}" />
-                        <fieldset>
-                            <section class="form-group">
-                                <input id="grooming{{forloop.counter}}" name="grooming" type="checkbox"{% if user.vote.grooming == g %}checked="checked"{% endif %} value="True" />
-                                <label for="grooming{{forloop.counter}}">
-                                    Best Grooming
-                                    {% if user.vote.grooming and user.vote.grooming != g %}
-                                    <small>(previously voted for {{user.vote.grooming.name}})</small>
-                                    {% endif %}
-                                </label>
-                            </section>
-                            <section class="form-group">
-                                <input id="execution{{forloop.counter}}" name="execution" type="checkbox"{% if user.vote.execution == g %}checked="checked"{% endif %} value="True" />
-                                <label for="execution{{forloop.counter}}">
-                                    Finest Execution
-                                    {% if user.vote.execution and user.vote.execution != g %}
-                                    <small>(previously voted for {{user.vote.execution.name}})</small>
-                                    {% endif %}
-                                </label>
-                            </section>
-                            <section class="form-group">
-                                <input id="creativity{{forloop.counter}}" name="creativity" type="checkbox"{% if user.vote.creativity == g %}checked="checked"{% endif %} value="True" />
-                                <label for="creativity{{forloop.counter}}">
-                                    Most Creative
-                                    {% if user.vote.creativity and user.vote.creativity != g %}
-                                    <small>(previously voted for {{user.vote.creativity.name}})</small>
-                                    {% endif %}
-                                </label>
-                            </section>
-                            <button type="submit" class="btn btn-lg btn-primary">Vote</button>
-                        </fieldset>
-                    </form>
-                </section>
-            </div>
-            <!-- comments section -->
-            {% if g.comment_set.count or user.is_authenticated %}
-            <section class="row comments col-xs-12 col-xs-offset-2">
-                <h4 class="pointer" title="Click to expand/collapse" data-toggle="collapse" data-target="#comments{{forloop.counter}}">&laquo; Comments about {{g.name}} &raquo;</h4>
-                <div id="comments{{forloop.counter}}" class="in">
-                    {% if g.comment_set.count %}
-                    <ul class="list-unstyled">
-                    {% for c in g.comment_set.all %}
-                        <li>
-                            <strong>{{c.poster.username}}</strong>
-                            <small>{{c.timestamp}}</small>
-                            <p>{{c.text}}</p>
-                        </li>
-                    {% endfor %}
-                    </ul>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                    <form class="col-12 col-lg-12" method="post" action="{% url 'voting:comment' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="gentleman_id" value="{{g.id}}" />
-                        <fieldset>
-                            <section class="form-group col-sm-8">
-                                {{ comment_form.text }}
-                            </section>
-                            <section class="form-group">
-                                <button type="submit" class="btn btn-sm">Comment</button>
-                            </section>
-                        </fieldset>
-                    </form>
-                    {% else %}
-                    <p class="loginorregister"><a href="{% url 'voting:login' %}">Login</a> <span class="or">or</span> <a href="{% url 'voting:register' %}">Register</a> to comment!</p>
-                    {% endif %}
+<form method="post" action="{% url 'voting:vote' %}">
+    {% csrf_token %}
+    <ul class="list-unstyled">
+    {% if gentlemen|length %}
+        {% for g in gentlemen %}
+        <li>
+            <section class="gentleman clearfix">
+                <div class="row">
+                    <h2>{{g.name}} <small>{{g.tagline}}</small></h2>
+                    <section class="before col-2 col-lg-3">
+                        <h3>Before</h3>
+                        {% if g.before_pic %}
+                        <a href="{{ g.before_pic.url }}"><img src="{{ g.before_pic_resized.url }}" /></a>
+                        {% else %}
+                        <a href="#"><img src="http://placehold.it/200x200" /></a>
+                        {% endif %}
+                    </section>
+                    <section class="after col-2 col-lg-4">
+                        <h3>After</h3>
+                        {% if g.after_pic %}
+                        <a href="{{ g.after_pic.url }}"><img src="{{ g.after_pic_resized.url }}" /></a>
+                        {% else %}
+                        <a href="#"><img src="http://placehold.it/200x200" /></a>
+                        {% endif %}
+                    </section>
+                    <section class="voting col-12 col-lg-5">
+                        <h3>Vote for this gentleman</h3>
+                            <fieldset>
+                                <section class="form-group">
+                                    <input id="grooming{{forloop.counter}}" name="grooming" type="radio"{% if user.vote.grooming == g %}checked="checked"{% endif %} value="{{g.id}}" />
+                                    <label for="grooming{{forloop.counter}}">
+                                        Best Grooming
+                                        {% if user.vote.grooming and user.vote.grooming != g %}
+                                        <small>(previously voted for {{user.vote.grooming.name}})</small>
+                                        {% endif %}
+                                    </label>
+                                </section>
+                                <section class="form-group">
+                                    <input id="execution{{forloop.counter}}" name="execution" type="radio"{% if user.vote.execution == g %}checked="checked"{% endif %} value="{{g.id}}" />
+                                    <label for="execution{{forloop.counter}}">
+                                        Finest Execution
+                                        {% if user.vote.execution and user.vote.execution != g %}
+                                        <small>(previously voted for {{user.vote.execution.name}})</small>
+                                        {% endif %}
+                                    </label>
+                                </section>
+                                <section class="form-group">
+                                    <input id="creativity{{forloop.counter}}" name="creativity" type="radio"{% if user.vote.creativity == g %}checked="checked"{% endif %} value="{{g.id}}" />
+                                    <label for="creativity{{forloop.counter}}">
+                                        Most Creative
+                                        {% if user.vote.creativity and user.vote.creativity != g %}
+                                        <small>(previously voted for {{user.vote.creativity.name}})</small>
+                                        {% endif %}
+                                    </label>
+                                </section>
+                                <button type="submit" class="btn btn-lg btn-primary">Vote</button>
+                            </fieldset>
+                        </form>
+                    </section>
                 </div>
-            </section>
-            {% else %}
-            <p class="loginorregister"><a href="{% url 'voting:login' %}">Login</a> <span class="or">or</span> <a href="{% url 'voting:register' %}">Register</a> to comment!</p>
-            {% endif %}
-            <!-- end comments section -->
+                <!-- comments section -->
+                {% if g.comment_set.count or user.is_authenticated %}
+                <section class="row comments col-xs-12 col-xs-offset-2">
+                    <h4 class="pointer" title="Click to expand/collapse" data-toggle="collapse" data-target="#comments{{forloop.counter}}">&laquo; Comments about {{g.name}} &raquo;</h4>
+                    <div id="comments{{forloop.counter}}" class="in">
+                        {% if g.comment_set.count %}
+                        <ul class="list-unstyled">
+                        {% for c in g.comment_set.all %}
+                            <li>
+                                <strong>{{c.poster.username}}</strong>
+                                <small>{{c.timestamp}}</small>
+                                <p>{{c.text}}</p>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                        <form class="col-12 col-lg-12" method="post" action="{% url 'voting:comment' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="gentleman_id" value="{{g.id}}" />
+                            <fieldset>
+                                <section class="form-group col-sm-8">
+                                    {{ comment_form.text }}
+                                </section>
+                                <section class="form-group">
+                                    <button type="submit" class="btn btn-sm">Comment</button>
+                                </section>
+                            </fieldset>
+                        </form>
+                        {% else %}
+                        <p class="loginorregister"><a href="{% url 'voting:login' %}">Login</a> <span class="or">or</span> <a href="{% url 'voting:register' %}">Register</a> to comment!</p>
+                        {% endif %}
+                    </div>
+                </section>
+                {% else %}
+                <p class="loginorregister"><a href="{% url 'voting:login' %}">Login</a> <span class="or">or</span> <a href="{% url 'voting:register' %}">Register</a> to comment!</p>
+                {% endif %}
+                <!-- end comments section -->
 
-        </section>
-    </li>
-    {% endfor %}
-{% else %}
-    <strong>No participants yet!</strong>
-{% endif %}
+            </section>
+        </li>
+        {% endfor %}
+    {% else %}
+        <strong>No participants yet!</strong>
+    {% endif %}
+    </ul>
+</form>
 {% endblock %}
