@@ -90,14 +90,21 @@ def profile(req):
         if pf.is_valid():
             ng = pf.save()
 
+            resize = False
+
             if 'before_pic' in req.FILES:
-                g.before_pic.file = req.FILES['before_pic']
+                g.before_pic = req.FILES['before_pic']
+                resize = True
             if 'after_pic' in req.FILES:
-                g.after_pic.file = req.FILES['after_pic']
+                g.after_pic = req.FILES['after_pic']
+                resize = True
 
             ng.user_id = g.user_id
             ng.id = g.id
             ng.save()
+
+            if resize:
+                ng.resize_if_needed()
 
             pf = ProfileForm(instance=ng)
 
