@@ -27,9 +27,9 @@ To Do
 * [x] Login to vote
 * [x] Comments on submissions
 * [x] Vote across all gentlemen at once instead of one at a time
-* [ ] Add LESS
-* [ ] Convert Bootstrap to LESS
-* [ ] Convert custom CSS to LESS
+* [x] Add LESS
+* [x] Convert Bootstrap to LESS
+* [x] Convert custom CSS to LESS
 * [ ] Use Bootstrap variables and mixins in custom LESS
 * [ ] Quick look at your current votes
 * [ ] Jump to any gentleman
