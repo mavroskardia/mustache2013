@@ -49,6 +49,9 @@ def participate(req):
                 gentleman.tagline = participate_form.cleaned_data['tagline']
                 gentleman.before_pic = participate_form.cleaned_data['before_pic']
                 gentleman.save()
+
+                gentleman.resize_if_needed()
+
                 user.backend = 'django.contrib.auth.backends.ModelBackend'
                 auth.login(req, user)
             except Exception as e:

@@ -24,15 +24,15 @@ class Gentleman(models.Model):
 		return self.name
 
 	def resize_if_needed(self):
-		#if self.before_pic and not self.before_pic_resized:
-		thumb = utils.create_thumbnail(self.before_pic.file)
-		fn = utils.create_thumbnail_name(self.before_pic.name)
-		self.before_pic_resized.save(fn, thumb)
+		if self.before_pic:
+			thumb = utils.create_thumbnail(self.before_pic.file)
+			fn = utils.create_thumbnail_name(self.before_pic.name)
+			self.before_pic_resized.save(fn, thumb)
 
-		#if self.after_pic and not self.after_pic_resized:
-		thumb = utils.create_thumbnail(self.after_pic.file)
-		fn = utils.create_thumbnail_name(self.after_pic.name)
-		self.after_pic_resized.save(fn, thumb)
+		if self.after_pic:
+			thumb = utils.create_thumbnail(self.after_pic.file)
+			fn = utils.create_thumbnail_name(self.after_pic.name)
+			self.after_pic_resized.save(fn, thumb)
 
 
 class Vote(models.Model):
