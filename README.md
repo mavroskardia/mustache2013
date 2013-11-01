@@ -12,6 +12,7 @@ It is a work-in-progress, but takes care of the basics of participation such as 
 
 Instructions to get it running
 ------------------------------
+* Make sure lessc is installed either via npm or your favorite package manager.
 * Make a virtualenv in checked out dir: ```virtualenv-2.7 ve```
 * Activate your ve: ```source ve/bin/activate```
 * Install requirements: ```pip install -r requirements.txt```
@@ -26,8 +27,10 @@ To Do
 * [x] Login to vote
 * [x] Comments on submissions
 * [x] Vote across all gentlemen at once instead of one at a time
-* [ ] Quick look at your current votes
-* [ ] Jump to any gentleman
 * [ ] Add LESS
 * [ ] Convert Bootstrap to LESS
+* [ ] Convert custom CSS to LESS
+* [ ] Use Bootstrap variables and mixins in custom LESS
+* [ ] Quick look at your current votes
+* [ ] Jump to any gentleman
 * [ ] Allow non-participating users to convert to participating?

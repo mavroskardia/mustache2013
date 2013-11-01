@@ -1,14 +1,26 @@
 {% load staticfiles %}
+{% load compress %}
+
 <!DOCTYPE html> <html>
     <head>
         <title>Manly Mustache Contest 2013</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+
+        <link rel="stylesheet" text="text/css" href="{% static 'css/bootstrap-theme.min.css' %}" />
+
+        {% if debug %}
+        <link rel="stylesheet/less" type="text/css" media="all" href="{% static 'less/style.less' %}" />
+        <script src="{% static 'js/less-1.5.0.min.js' %}"></script>
+        {% else %}
+        {% compress css %}
+        <link rel="stylesheet" type="text/less" media="all" href="{% static 'less/style.less' %}" />
+        {% endcompress %}
+        {% endif %}
+
         <link href='http://fonts.googleapis.com/css?family=Belleza' rel='stylesheet' type='text/css'>
         <!--<link href='http://fonts.googleapis.com/css?family=Cherry+Swash' rel='stylesheet' type='text/css' />
-        <link href='http://fonts.googleapis.com/css?family=Qwigley' rel='stylesheet' type='text/css'>-->
+        <link href='http:j//fonts.googleapis.com/css?family=Qwigley' rel='stylesheet' type='text/css'>-->
+
         {% block extrastyle %}
         {% endblock %}
     </head>
