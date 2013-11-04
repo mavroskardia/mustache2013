@@ -16,8 +16,7 @@ from forms import LoginForm,ParticipateForm,ProfileForm,CommentForm
 def home(req):
     gents = list(Gentleman.objects.all())
 
-    if 'HTTP_REFERER' in req.META and 'mustache.chryso.net' not in req.META['HTTP_REFERER']:
-        shuffle(gents) # only want to shuffle when we aren't already on the site to avoid confusion after voting, logging, etc.
+    shuffle(gents)
 
     return render(req, 'voting/home.html', {'gentlemen': gents, 'comment_form': CommentForm() })
 
