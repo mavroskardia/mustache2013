@@ -44,7 +44,7 @@ def participate(req):
                 user = User.objects.create_user(participate_form.cleaned_data['username'], None, participate_form.cleaned_data['password'])
                 gentleman = Gentleman()
                 gentleman.user_id = user.id
-                gentleman.name = participate_form.cleaned_data['username']
+                gentleman.name = participate_form.cleaned_data['name']
                 gentleman.tagline = participate_form.cleaned_data['tagline']
                 gentleman.before_pic = participate_form.cleaned_data['before_pic']
                 gentleman.save()
