@@ -166,3 +166,17 @@ def comment(req):
 def logout(req):
     auth.logout(req)
     return HttpResponseRedirect(reverse('home'))
+
+def results(req):
+
+    voters = User.objects.all()
+    votes = Vote.objects.all()
+    turnout = len(votes) * 100.0 / len(voters)
+
+    return render(req,
+        'voting/results.html', {
+            'gentlemen': Gentleman.objects.all(),
+            'votes': votes,
+            'voters': voters,
+            'turnout': turnout
+        })

@@ -34,3 +34,5 @@ To Do
 * [ ] Quick look at your current votes
 * [ ] Jump to any gentleman
 * [ ] Allow non-participating users to convert to participating?
+* [ ] Password reset
+* [ ] More obvious difference between participating and just registering to vote.

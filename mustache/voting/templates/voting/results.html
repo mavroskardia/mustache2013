@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Results!</h2>
+
+<p>There were {{ votes|length }} total vote{{ votes|pluralize }} out of {{ voters|length }} eligible voter{{ voters|pluralize }} for a voter turnout of {{ turnout|floatformat:2 }}%</p>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th><th>Creativity</th><th>Execution</th><th>Grooming</th>
+		</tr>
+	</thead>
+	<tbody>
+{% for gentleman in gentlemen %}
+		<tr>
+			<td>{{ gentleman.name }}</td>
+			<td>{{ gentleman.creativity_set.count }}</td>
+			<td>{{ gentleman.execution_set.count }}</td>
+			<td>{{ gentleman.grooming_set.count }}</td>
+		</tr>
+{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}
