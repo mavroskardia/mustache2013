@@ -12,14 +12,37 @@ It is a work-in-progress, but takes care of the basics of participation such as 
 
 Instructions to get it running
 ------------------------------
-* Make sure lessc is installed either via npm or your favorite package manager.
-* Make a virtualenv in checked out dir: ```virtualenv-2.7 ve```
-* Activate your ve: ```source ve/bin/activate```
-* Install requirements: ```pip install -r requirements.txt```
-* Set up migrations: ```cd mustache; ./manage.py schemamigration --initial voting```
-* Sync your database: ```./manage.py syncdb```
-* Run migration: ```./manage.py migrate voting```
-* Try out test server: ```./manage.py runserver```
+* Make sure `lessc` is installed either via npm or your favorite package manager.
+* Pull the code from github: 
+```
+git clone https://github.com/mavroskardia/mustache2013.git
+```
+* Make a virtualenv in checked out dir:
+```
+virtualenv ve
+```
+* Activate your ve: 
+```
+source ve/bin/activate
+```
+* Install requirements: 
+```
+pip install -r requirements.txt
+```
+* Set up migrations and your database: 
+```
+cd mustache
+./manage.py makemigrations voting
+./manage.py migrate
+```
+* Create a superuser: 
+```
+./manage.py createsuperuser
+```
+* Try out test server: 
+```
+./manage.py runserver
+```
 
 To Do
 -----
