@@ -7,6 +7,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -131,7 +133,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'south',
     'compressor',
     'voting'
 )

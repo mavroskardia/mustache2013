@@ -9,8 +9,8 @@ from django.contrib import messages
 import django.contrib.auth as auth
 from django.contrib.auth.models import User
 
-from models import Gentleman,Vote,Comment
-from forms import LoginForm,ParticipateForm,ProfileForm,CommentForm
+from .models import Gentleman,Vote,Comment
+from .forms import LoginForm,ParticipateForm,ProfileForm,CommentForm
 
 
 def home(req):
