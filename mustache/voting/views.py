@@ -1,5 +1,9 @@
 # Create your views here.
-from itertools import zip_longest
+try:
+    from itertools import zip_longest   # supporting >=3.4
+except:
+    from itertools import izip_longest  # supporting <3.4
+
 from random import shuffle
 
 from django.core.urlresolvers import reverse
