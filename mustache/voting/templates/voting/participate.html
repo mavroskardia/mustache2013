@@ -1,15 +1,39 @@
 {% extends 'base.html' %}
 
+{% block extrastyle %}
+  <style type="text/css">
+    body { 
+      background: #8e44ad url('../static/images/pattern.png') repeat 20px 20px; 
+      -webkit-animation: pattern-movement 30s ease-in-out infinite;
+         -moz-animation: pattern-movement 30s ease-in-out infinite;
+           -o-animation: pattern-movement 30s ease-in-out infinite;
+              animation: pattern-movement 30s ease-in-out infinite;
+    }
+  </style>
+{% endblock %}
+
 {% block content %}
-<form class="col-lg-5 col-12 text-left" method="post" action="{% url 'voting:participate' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% for field in participate_form %}
-    <div class="form-group">
-        {{ field.label }}
-        {{ field }}
-        {{ field.errors }}
+  {% include "voting/nav.html" %}
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-12">
+        <div class="card jumbo">
+          <form method="post" action="{% url 'voting:participate' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>
+              Participate
+              <small>Get your stache on</small>
+            <h2>
+            {% for field in participate_form %}
+              <div class="form-group">
+                  {{ field }}
+                  {{ field.errors }}
+              </div>
+              {% endfor %}
+              <button type="submit">Sign up</button>
+          </form>
+        <div>
+      </div>
     </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-lg btn-primary">Sign up</button>
-</form>
+  </div>
 {% endblock %}

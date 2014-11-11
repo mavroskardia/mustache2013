@@ -1,33 +1,44 @@
 {% extends 'base.html' %}
-
 {% block extrastyle %}
-
-    <style>
-        .gentleman { border-bottom: solid 1px #ccc; padding-bottom: 1em;}
-        .voting label { font-size: 16px; }
-    </style>
 
 {% endblock %}
 
-{% block content %}
-<form method="post" action="{% url 'voting:vote' %}">
-    {% csrf_token %}
-    <ul class="list-unstyled">
-    {% if gentlemen|length %}
-        {% for gent1, gent2 in pairs_of_gents %}
-            
-            {% if gent1 %}
-            <li>{{ gent1 }}</li>
-            {% endif %}
-            
-            {% if gent2 %}
-            <li>{{ gent2 }}</li>
-            {% endif %}
 
-        {% endfor %}
-    {% else %}
-        <strong>No participants yet!</strong>
-    {% endif %}
-    </ul>
-</form>
+{% block content %}
+{% include "voting/nav.html" %}
+  <div class="wrap">
+    <header class="masthead">
+      <h1>
+        Manly Mustache {% now "Y" %}
+        <small>Its  time to stash up</small>
+      </h1>
+    </header>
+    <div class="container-fluid content">
+      {% if gentlemen|length %} 
+        <form method="post" action="{% url 'voting:vote' %}">
+          {% csrf_token %}
+          {% for gent1, gent2 in pairs_of_gents %}
+            <div class="row">
+              {% if gent1 %}
+                <div class="col-md-6 col-xs-6">
+                  {% include 'voting/gent.html' with gent=gent1 %}                
+                </div>
+              {% endif %}
+              {% if gent2 %}
+                <div class="col-md-6 col-xs-6">
+                  {% include 'voting/gent.html' with gent=gent2 %} 
+                </div>
+              {% endif %}
+            </div>
+           {% endfor %}
+        </form>
+      {% else %}
+        <div class="col-12">
+          <p class="text-center">
+            <strong>- No participants yet -</strong>
+          </p>
+        </div>
+      {% endif %} 
+    </div>
+  </div>
 {% endblock %}

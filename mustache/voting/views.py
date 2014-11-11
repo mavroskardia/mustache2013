@@ -21,7 +21,7 @@ def home(req):
     gents = list(Gentleman.objects.all())                   # get everybody (would eventually page this)
     shuffle(gents)                                          # shuffle the list so there is a different order each time
     it = iter(gents)                                        # convert the list into an iterable so we can use zip_longest
-    paired_gents = zip_longest(*[it] * 2, fillvalue=None)   # pair up the members of the list, if the length is odd, fill in with None
+    paired_gents = izip_longest(*[it] * 2, fillvalue=None)   # pair up the members of the list, if the length is odd, fill in with None
 
     return render(req, 'voting/home.html', {'pairs_of_gents': paired_gents, 'gentlemen': gents, 'comment_form': CommentForm() })
 
