@@ -1,21 +1,37 @@
 {% extends 'base.html' %}
-
+{% block extrastyle %}
+  <style type="text/css">
+    body { 
+      background: #8e44ad url('../static/images/pattern.png') repeat 20px 20px; 
+      -webkit-animation: pattern-movement 30s ease-in-out infinite;
+         -moz-animation: pattern-movement 30s ease-in-out infinite;
+           -o-animation: pattern-movement 30s ease-in-out infinite;
+              animation: pattern-movement 30s ease-in-out infinite;
+    }
+  </style>
+{% endblock %}
 {% block content %}
-
-<p>Don't have a login yet? <a href="{% url 'voting:register' %}">Register!</a></p>
-
-<form action="{% url 'voting:login' %}" method="post" class="col-12 col-lg-5 text-left">
-	{% csrf_token %}
-	{% for field in login_form %}
-		<div class="form-group">
-            {{ field.label }}
-			{{ field }}
-            {{ field.errors }}
-		</div>
-	{% endfor %}
-	<div class="form-group">
-		<button type="submit" class="btn btn-primary btn-lg">Login</button>
+	{% include "voting/nav.html" %}
+	<div class="container">
+		<div class="row text-center">
+	    <div class="col-12">
+	      <div class="card jumbo">
+					<form action="{% url 'voting:login' %}" method="post">
+						{% csrf_token %}
+						<h2>Login</h2>
+						{% for field in login_form %}
+							<div class="form-group">
+								{{ field }}
+					      {{ field.errors }}
+							</div>
+						{% endfor %}
+						<div class="form-group">
+							<button type="submit">Login</button>
+						</div>
+						<p>Don't have a login yet? <a href="{% url 'voting:register' %}">Register!</a></p>
+					</form>
+	      <div>
+	    </div>
+	  </div>
 	</div>
-</form>
-
 {% endblock %}

@@ -1,69 +1,58 @@
 {% load staticfiles %}
 {% load compress %}
-
-<!DOCTYPE html> <html>
-    <head>
-        <title>Manly Mustache Contest 2013</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <link rel="stylesheet" text="text/css" href="{% static 'css/bootstrap-theme.min.css' %}" />
-
-        {% if debug %}
-        <link rel="stylesheet/less" type="text/css" media="all" href="{% static 'less/style.less' %}" />
-        <script src="{% static 'js/less-1.5.0.min.js' %}"></script>
-        {% else %}
-        {% compress css %}
+<!DOCTYPE html> 
+<html>
+  <head>
+    <title>Manly Mustache Contest 2013</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" text="text/css" href="{% static 'css/bootstrap-theme.min.css' %}" />
+    {% if debug %}
+      <link rel="stylesheet/less" type="text/css" media="all" href="{% static 'less/style.less' %}" />
+      <script src="{% static 'js/less-1.5.0.min.js' %}"></script>
+    {% else %}
+      {% compress css %}
         <link rel="stylesheet" type="text/less" media="all" href="{% static 'less/style.less' %}" />
-        {% endcompress %}
-        {% endif %}
-
-        <link href='http://fonts.googleapis.com/css?family=Belleza' rel='stylesheet' type='text/css'>
-        <!--<link href='http://fonts.googleapis.com/css?family=Cherry+Swash' rel='stylesheet' type='text/css' />
-        <link href='http:j//fonts.googleapis.com/css?family=Qwigley' rel='stylesheet' type='text/css'>-->
-
-        {% block extrastyle %}
-        {% endblock %}
+      {% endcompress %}
+    {% endif %}
+    {% block extrastyle %}
+    {% endblock %}
     </head>
     <body>
-        <div class="container">
-            <div class="col-3 col-lg-3 pull-right">
-            {% if user.is_authenticated %}
-                {% if user.gentleman %}
-                Logged in as <strong><a href="{% url 'voting:profile' %}">{{user.username}}</a></strong> | <a href="{% url 'voting:logout' %}">Logout</a>
-                {% else %}
-                Logged in as <strong>{{ user.username }}</strong> | <a href="{% url 'voting:logout' %}">Logout</a>
-                {% endif %}
-            {% else %}
-                <a href="{% url 'voting:participate' %}">Participate</a> | <a href="{% url 'voting:register' %}">Register</a> | <a href="{% url 'voting:login' %}">Login</a>
-            {% endif %}
-            </div>
+      {% if messages %}
+        <ul class="messages list-unstyled nav nav-pills">
+          {% for message in messages %}
+            <li class="col-xs-12 alert alert-dismissable {% if message.tags %}alert-{{message.tags}}{% endif %}">
+              <span class="pull-left">{{message}}</span>
+              <button class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
 
-            <h1 class="row"><a href="{% url 'home' %}">Manly Mustache 2013</a></h1>
+      {% block content %}
+      {% endblock %}
 
-            {% if messages %}
-                <ul class="messages list-unstyled nav nav-pills">
-                {% for message in messages %}
-                    <li class="col-xs-12 alert alert-dismissable {% if message.tags %}alert-{{message.tags}}{% endif %}">
-                        <span class="pull-left">{{message}}</span>
-                        <button class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    </li>
-                {% endfor %}
-                </ul>
-            {% endif %}
 
-            {% block content %}
-            {% endblock %}
-        </div>
-
-        <div class="nav navbar-default navbar-fixed-bottom">
+<!--         <div class="nav navbar-default navbar-fixed-bottom">
             <div class="container">
                 <div class="row">
                     <em>The Manly Mustache Contest is a contribution towards raising awareness for men's health issues. See <a href="http://movember.com">Movember</a> for more information.</em>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    </body>
+    <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="{% static 'js/application.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/waypoints.js' %}"></script>
+    <script src="{% static 'js/waypoints-sticky.js' %}"></script>
+    <script type="text/javascript">
+      Mustache.Layout.setMasthead();
+      $(document).ready(function() {
+        $('nav.navigation').waypoint('sticky', {
+          offset: -66
+        });
+      });
+    </script>
+  </body>
 </html>

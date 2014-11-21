@@ -1,21 +1,38 @@
 {% extends 'base.html' %}
+{% block extrastyle %}
+  <style type="text/css">
+    body { 
+      background: #8e44ad url('../static/images/pattern.png') repeat 20px 20px; 
+      -webkit-animation: pattern-movement 30s ease-in-out infinite;
+         -moz-animation: pattern-movement 30s ease-in-out infinite;
+           -o-animation: pattern-movement 30s ease-in-out infinite;
+              animation: pattern-movement 30s ease-in-out infinite;
+    }
+  </style>
+{% endblock %}
 
 {% block content %}
-
-<p>Register so you can vote!</p>
-
-<form class="col-12 col-md-5 col-lg-5 text-left" method="post" action="{% url 'voting:register' %}">
-    {% csrf_token %}
-    <fieldset>
-        {% for field in register_form %}
-        <div class="form-group">
-            {{ field.label }}
-            {{ field }}
-            {{ field.error }}
-        </div>
-        {% endfor %}
-        <button type="submit" class="btn btn-lg btn-primary">Register</button>
-    </fieldset>
-</form>
-
+  {% include "voting/nav.html" %}
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-12">
+          <div class="card jumbo">
+            <form method="post" action="{% url 'voting:register' %}">
+              {% csrf_token %}
+              <h2>
+                Register
+                <small>rock the vote!</small>
+              </h2>
+              {% for field in register_form %}
+                <div class="form-group">
+                  {{ field }}
+                  {{ field.error }}
+                </div>
+              {% endfor %}
+              <button type="submit">Register</button>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
