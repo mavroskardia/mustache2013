@@ -1,1 +1,58 @@
-<h1>{{ gent.name }}</h1>
+
+<div class="card gent">
+  <!-- Images -->
+  <section class="images">
+    <div class="before">
+      {% if gent.before_pic %}
+        <a href="{{ gent.before_pic.url }}"><img src="{{ gent.before_pic_resized.url }}" /></a>
+      {% else %}
+        <img src="/static/images/placeholder.png">
+      {% endif %}
+    </div>
+    <div class="after">
+      {% if gent.after_pic %}
+         <a href="{{ gent.after_pic.url }}"><img src="{{ gent.after_pic_resized.url }}" /></a>
+      {% else %}
+        <img src="/static/images/placeholder.png">
+      {% endif %}
+    </div>
+  </section>
+  <!-- Name/Tagline -->
+  <h3>
+    {{ gent.name }}
+    <small>{{gent.tagline}}</small>
+  </h3>
+  <!-- Comments -->
+  <section class="comments">
+    {% if gent.comment_set.count %}
+      <ul class="comments">
+        {% for c in gent.comment_set.all %}
+          <li>
+            <p>{{c.text}}</p>
+            <small>
+              <strong>{{c.poster.username}}</strong> / {{c.timestamp}}
+            </small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% if user.is_authenticated %}
+      <form method="post" action="{% url 'voting:comment' %}">
+        {% csrf_token %}
+        <input type="hidden" name="gentleman_id" value="{{gent.id}}" />
+        <div class="comment-wrapper">
+          {{ comment_form.text }}
+          <button type="submit">Comment</button>
+        </div>
+      </form>
+    {% else %}
+      <p class="login">
+        <a href="{% url 'voting:login' %}">Login</a> /
+        <a href="{% url 'voting:register' %}">Register</a> to comment!</p>
+      </p>
+    {% endif %}
+  </section>
+</div>
+
+  
+                   
