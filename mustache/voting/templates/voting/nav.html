@@ -1,0 +1,28 @@
+{% block content %}     
+  <nav class="navigation">
+    <div class="container">
+      <div class="row">
+        {% if user.is_authenticated %}
+          <div class="col-md-12">
+            {% if user.gentleman %}
+              Logged in as <a href="{% url 'voting:profile' %}">{{user.username}}</a> / 
+              <a href="{% url 'voting:logout' %}">Logout</a>
+            {% else %}
+              Logged in as {{ user.username }} / 
+              <a href="{% url 'voting:logout' %}">Logout</a>
+            {% endif %}
+          </div>
+        {% else %}
+          <div class="col-md-6 col-xs-6">
+            <a href="/" class="home">Home</a>
+            <a href="{% url 'voting:login' %}">Login</a> 
+          </div>
+          <div class="col-md-6 col-xs-6">
+            <a href="{% url 'voting:participate' %}">Participate</a>
+            <a href="{% url 'voting:register' %}">Register</a>
+          </div>           
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+{% endblock %}
