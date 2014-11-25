@@ -128,14 +128,12 @@ nav.navigation {
 
 .content {
 	background: #fff;
-	padding: 20px 0 20px 0;
+	padding: 20px;
 	margin: 0;
 	height: 100%;
 	width: 100%;
 	z-index: 100;
-
 	.row.gents .col-md-6 { padding-top: 20px; }
-
 }
 
 header.masthead {
@@ -144,7 +142,7 @@ header.masthead {
 	left: 0;
 	height: 580px;
 	width: 100%;
-	padding: 0;
+	padding: 0 20px;
 	margin: 0;
 	background-color: @purple-drink;
 	z-index: -1;
@@ -230,6 +228,7 @@ header.masthead {
 	}
 
 	h3 {
+		position: relative;
 		display: block;
 		padding: 15px;
 		margin: 0;
@@ -241,15 +240,31 @@ header.masthead {
 			font-family: 'Helvetica', Helvetica, Arial, sans-serif;
 		}
 
+		.toggle-comments {
+   		position: absolute;
+   		top: 25px;
+   		right: 0;
+   		color: #fff;
+   		font-weight: normal;
+   		font-size: 14px;
+   		font-family: 'Helvetica', Helvetica, Arial, sans-serif;
+   		text-align: center;
+   		padding: 5px;
+   		background: @purple-drink;
+
+		}
+
 	}
 
-	section.comments {
+	section.comments-wrapper {
 		display: block;
 		background: #f7f7f7;
 		border-top: 1px solid darken(#f7f7f7, 3%);
 		border-bottom: 1px solid darken(#f7f7f7, 3%);
 
-		.comment-wrapper {
+		/*
+
+		.form-wrapper {
 			padding: 15px;
 			margin: 0;
 			display: block;
@@ -281,24 +296,27 @@ header.masthead {
 			}
 
 		}
+	
+		*/
 
 		p.login {
 			text-align: center;
 			padding: 10px;
 		}
 
-		ul.comments {
+		ul.comments-list {
 			list-style-type: none;
 			padding: 0;
 			margin: 0;
 
 			li:first-child { 
+				display: block;
 				padding-right: 40px;
 				background: transparent url('../images/comment-icon.png') no-repeat 98% center; 
 			}
 
 			li {
-				display: block;
+				display: none;
 				padding: 15px;
 				border-bottom: 1px solid darken(#f7f7f7, 3%);
 
@@ -439,8 +457,6 @@ ul.errorlist {
 }
 
 /* Misc */
-
-.row { margin: 0; }
 
 .card {
 	padding: 15px;
