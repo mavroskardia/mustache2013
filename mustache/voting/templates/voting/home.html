@@ -14,29 +14,26 @@
       </h1>
     </header>
     {% if gentlemen|length %} 
-      <form method="post" action="{% url 'voting:vote' %}"> 
-        {% csrf_token %}
-        <div class="container-fluid content">
-          <div class="row">
-            <div class="container">
-              {% for gent1, gent2 in pairs_of_gents %}
-                <div class="row gents">
-                  {% if gent1 %}
-                    <div class="col-md-6 col-sm-6">
-                      {% include 'voting/gent.html' with gent=gent1 %}                
-                    </div>
-                  {% endif %}
-                  {% if gent2 %}
-                    <div class="col-md-6 col-sm-6">
-                      {% include 'voting/gent.html' with gent=gent2 %} 
-                    </div>
-                  {% endif %}
-                </div>
-              {% endfor %} 
-            </div>
+      <div class="container-fluid content">
+        <div class="row">
+          <div class="container">
+            {% for gent1, gent2 in pairs_of_gents %}
+              <div class="row gents">
+                {% if gent1 %}
+                  <div class="col-md-6 col-sm-6">
+                    {% include 'voting/gent.html' with gent=gent1 %}                
+                  </div>
+                {% endif %}
+                {% if gent2 %}
+                  <div class="col-md-6 col-sm-6">
+                    {% include 'voting/gent.html' with gent=gent2 %} 
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %} 
           </div>
         </div>
-      </form>
+      </div>
     {% else %}
       <div class="container-fluid content">
         <div class="col-12">
