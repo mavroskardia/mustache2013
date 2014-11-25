@@ -49,12 +49,7 @@
     <script src="{% static 'js/waypoints.js' %}"></script>
     <script src="{% static 'js/waypoints-sticky.js' %}"></script>
     <script type="text/javascript">
-      Mustache.setMasthead();
-      $(document).ready(function() {
-        $('nav.navigation').waypoint('sticky', {
-          offset: -66
-        });
-      });
+      Mustache.Layout.setMasthead();
     </script>
   </body>
 </html>
