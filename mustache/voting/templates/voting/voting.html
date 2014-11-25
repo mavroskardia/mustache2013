@@ -1,0 +1,15 @@
+<form method="post" action="{% url 'voting:vote' %}">
+	{% csrf_token %}
+
+	<input type="radio" name="grooming" id="grooming_{{ gent.id }}" {% if user.vote.grooming == gent %}checked="checked"{% endif %} value="{{gent.id}}">
+	<label for="grooming_{{ gent.id }}">Grooming</label>
+	
+	<input type="radio" name="execution" id="execution_{{ gent.id }}" {% if user.vote.execution == gent %}checked="checked"{% endif %} value="{{gent.id}}">
+	<label for="execution_{{ gent.id }}">Execution</label>
+	
+	<input type="radio" name="creativity" id="creativity_{{ gent.id }}" {% if user.vote.creativity == gent %}checked="checked"{% endif %} value="{{gent.id}}">
+	<label for="creativity_{{ gent.id }}">Creativity</label>
+
+	<button type="submit">Vote for {{ gent.name }}</button>
+
+</form>
