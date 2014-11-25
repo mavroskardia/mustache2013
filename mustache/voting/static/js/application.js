@@ -1,7 +1,7 @@
 var Mustache = {};
 var klasses = [ 'dali', 'borat', 'sellec', 'swanson', 'burgundy' ];
 
-$(document).on('click', 'a.toggle-comments', function() {
+$('a.toggle-comments').on('click', function() {
   Mustache.toggleComments(this);
   return false;
 });
@@ -15,7 +15,7 @@ Mustache = {
 
   toggleComments: function(el){
     var commentList = $(el).parent().next().children('ul.comments-list');
-    commentList.children(':nth-child(n+3)').stop().slideToggle();
+    commentList.children(':nth-child(n+2)').stop().slideToggle();
   }
 
 }
