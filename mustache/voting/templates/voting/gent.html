@@ -21,11 +21,14 @@
   <h3>
     {{ gent.name }}
     <small>{{gent.tagline}}</small>
+    {% if gent.comment_set.count > 1%}
+      <a href="#" class="toggle-comments">show all</a>
+    {% endif %}
   </h3>
   <!-- Comments -->
-  <section class="comments">
+  <section class="comments-wrapper">
     {% if gent.comment_set.count %}
-      <ul class="comments">
+      <ul class="comments-list">
         {% for c in gent.comment_set.all %}
           <li>
             <p>{{c.text}}</p>
