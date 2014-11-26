@@ -1,17 +1,34 @@
 {% extends 'base.html' %}
+{% block extrastyle %}
+  <style type="text/css">
+    body { 
+      background: #8e44ad url('../static/images/pattern.png') repeat 20px 20px; 
+      -webkit-animation: pattern-movement 30s linear infinite;
+         -moz-animation: pattern-movement 30s linear infinite;
+           -o-animation: pattern-movement 30s linear infinite;
+              animation: pattern-movement 30s linear infinite;
+    }
+  </style>
+{% endblock %}
 
 {% block content %}
-	<form class="col-12 col-md-5 col-lg-5 text-left" enctype="multipart/form-data" method="post" action="{% url 'voting:profile' %}">
-		{% csrf_token %}
-		<fieldset>
-			{% for field in pf %}
-				<div class="form-group">
-					<label>{{field.label}}</label>
-					{{field}}
-					{{field.errors}}
-				</div>
-			{% endfor %}
-		</fieldset>
-		<button type="submit" class="btn btn-lg btn-primary">Update</button>
-	</form>
+  {% include "voting/nav.html" %}
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-12">
+          <div class="card jumbo">
+						<form enctype="multipart/form-data" method="post" action="{% url 'voting:profile' %}">
+							{% csrf_token %}
+								{% for field in pf %}
+									<div class="form-group">
+										{{field}}
+										{{field.errors}}
+									</div>
+								{% endfor %}
+							<button type="submit">Update</button>
+						</form>
+          </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
