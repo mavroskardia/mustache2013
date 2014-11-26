@@ -40,14 +40,14 @@
       </ul>
     {% endif %}
     {% if user.is_authenticated %}
-      <form method="post" action="{% url 'voting:comment' %}">
-        {% csrf_token %}
-        <input type="hidden" name="gentleman_id" value="{{gent.id}}" />
-        <div class="comment-wrapper">
+      <div class="form-wrapper">
+        <form method="post" action="{% url 'voting:comment' %}">
+          {% csrf_token %}
+          <input type="hidden" name="gentleman_id" value="{{gent.id}}" />
           {{ comment_form.text }}
           <button type="submit">Comment</button>
-        </div>
-      </form>
+        </form>
+      </div>
     {% else %}
       <p class="login">
         <a href="{% url 'voting:login' %}">Login</a> /

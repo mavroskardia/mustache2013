@@ -3,7 +3,7 @@ var staches = [ 'dali', 'borat', 'sellec', 'swanson', 'burgundy' ];
 var current_frame, total_frames, path, length, handle;
 
 $('a.toggle-comments').on('click', function() {
-  Mustache.toggleComments(this);
+  Mustache.Layout.toggleComments(this);
   return false;
 });
 
