@@ -22,7 +22,7 @@
     {{ gent.name }}
     <small>{{gent.tagline}}</small>
     {% if gent.comment_set.count > 1%}
-      <a href="#" class="toggle-comments">show all</a>
+      <a href="#" class="toggle-comments">show all {{ gent.comment_set.count }}</a>
     {% endif %}
   </h3>
   <!-- Comments -->
