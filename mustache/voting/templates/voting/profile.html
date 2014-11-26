@@ -20,7 +20,7 @@
 						<form enctype="multipart/form-data" method="post" action="{% url 'voting:profile' %}">
 							{% csrf_token %}
 								{% for field in pf %}
-									<div class="form-group">
+									<div class="form-group">                    
 										{{field}}
 										{{field.errors}}
 									</div>

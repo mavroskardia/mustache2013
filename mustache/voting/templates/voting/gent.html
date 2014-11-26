@@ -51,13 +51,15 @@
     {% else %}
       <p class="login">
         <a href="{% url 'voting:login' %}">Login</a> /
-        <a href="{% url 'voting:register' %}">Register</a> to comment!</p>
+        <a href="{% url 'voting:register' %}">Register</a> to comment and vote!</p>
       </p>
     {% endif %}
   </section>
+  {% if user.is_authenticated %}
   <section class="voting-wrapper">
     {% include 'voting/voting.html' with gent=gent %}
   </section>
+  {% endif %}
 </div>
 
   
