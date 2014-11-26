@@ -129,12 +129,11 @@ nav.navigation {
 .content {
 	position: relative;
 	background: #fff;
-	padding: 20px;
+	padding: 40px 0;
 	margin: 0;
 	height: 100%;
 	width: 100%;
 	z-index: 100;
-	.row.gents .col-md-6 { padding-top: 20px; }
 
 	svg {
 		position: absolute;
@@ -151,10 +150,9 @@ nav.navigation {
               transition: fill .5s ease-in;
 		}
 
-
 	}
 
-
+	.row.gents [class*="col"] { margin-bottom: 20px; }
 
 }
 
@@ -164,8 +162,6 @@ header.masthead {
 	left: 0;
 	height: 580px;
 	width: 100%;
-	padding: 0 20px;
-	margin: 0;
 	background-color: @purple-drink;
 	z-index: -1;
 
@@ -176,6 +172,8 @@ header.masthead {
 	&.burgundy { background: @purple-drink url('../images/burgundy.png') no-repeat center center;  }
 
 	h1 {
+		margin-top: -20px;
+		padding: 20px;
 		position: relative;
   	top: 50%;
   	transform: translateY(-50%);
@@ -284,8 +282,6 @@ header.masthead {
 		border-top: 1px solid darken(#f7f7f7, 3%);
 		border-bottom: 1px solid darken(#f7f7f7, 3%);
 
-		/*
-
 		.form-wrapper {
 			padding: 15px;
 			margin: 0;
@@ -315,11 +311,10 @@ header.masthead {
 				font-size: 14px;
 				padding: 5px 10px;
 				font-weight: 400;
+				border-width: 2px;	
 			}
 
 		}
-	
-		*/
 
 		p.login {
 			text-align: center;
@@ -355,8 +350,87 @@ header.masthead {
 
 	}
 
+	section.voting-wrapper {
+		ul {
+			list-style-type: none;
+			padding: 0;
+			margin: 0;	
 
+			li {
+				padding: 15px;
+				border-bottom: 1px solid darken(#f7f7f7, 3%);	
+				&:last-child { border-bottom: 0; }
 
+				label {
+					color: @purple-drink;
+					margin-left: 10px;
+					cursor: pointer;
+				}
+
+				small {
+					float: right;
+					color: #d3d3d3;
+					margin-top: 5px;
+				}
+
+				button[type="submit"] {
+					font-size: 22px;
+					padding: 8px 35px;
+					border-width: 2px;	
+				}
+			}
+		}	
+	}
+
+}
+
+footer {
+	position: relative;
+	display: block;
+	height: 400px;
+	overflow: hidden;
+
+	&:after {
+		content: '';
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 800px;
+		width: 100%;
+		background: #8e44ad url('../images/pattern.png') repeat 20px 20px; 
+	  -webkit-animation: pattern-movement 30s ease-in-out infinite;
+	     -moz-animation: pattern-movement 30s ease-in-out infinite;
+	       -o-animation: pattern-movement 30s ease-in-out infinite;
+	          animation: pattern-movement 30s ease-in-out infinite;
+	}
+
+	h1 {
+		position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+    display: block;
+    text-align: center;
+    color: #fff;
+    line-height: 1;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, .15);
+    font-family: 'Roboto Slab', serif;
+    font-size: 40px;
+    letter-spacing: 2px;
+
+    @media (max-width: 420px) { 
+    	font-size: 35px; 
+    	line-height: 1.2;
+    }
+
+	}
+
+	a,
+	a:visited { 
+		text-transform: uppercase;
+		color: darken(@purple-drink, 15%); 
+		text-shadow: 0 2px 0 rgba(0, 0, 0, .5);
+	}
 
 }
 
