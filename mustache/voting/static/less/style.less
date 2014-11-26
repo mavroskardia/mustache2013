@@ -34,9 +34,11 @@
 
 .placeholder(@color: #ccc) {
 	input::-webkit-input-placeholder { color: @color; }
-	input:-moz-placeholder { color: @color; }
+	input:-moz-placeholder,
+	input::-moz-placeholder { color: @color; }
 	textarea::-webkit-input-placeholder { color: @color; }
-	textarea:-moz-placeholder { color: @color; }
+	textarea:-moz-placeholder,
+	textarea::-moz-placeholder { color: @color; }
 }
 
 a,
@@ -399,10 +401,10 @@ footer {
 		height: 800px;
 		width: 100%;
 		background: #8e44ad url('../images/pattern.png') repeat 20px 20px; 
-	  -webkit-animation: pattern-movement 30s ease-in-out infinite;
-	     -moz-animation: pattern-movement 30s ease-in-out infinite;
-	       -o-animation: pattern-movement 30s ease-in-out infinite;
-	          animation: pattern-movement 30s ease-in-out infinite;
+	  -webkit-animation: pattern-movement 30s linear infinite;
+	     -moz-animation: pattern-movement 30s linear infinite;
+	       -o-animation: pattern-movement 30s linear infinite;
+	          animation: pattern-movement 30s linear infinite;
 	}
 
 	h1 {
@@ -440,6 +442,7 @@ input[type="text"],
 input[type="password"],
 textarea,
 textarea.form-control {
+	height: 100%;
 	font-family: 'Helvetica', Helvetica, Arial, sans-serif;
 	background: #f9f9f9;
 	border-right: 1px solid #f9f9f9;
@@ -531,7 +534,7 @@ ul.errorlist {
 
 		input[type="text"],
 		input[type="password"] { 
-			padding: 30px 15px; 
+			padding: 15px; 
 		}
 
 		input[type="file"] {
